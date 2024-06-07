@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../../screens/Home/home.screen";
+import Profile from "../../screens/Profile/profile.screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +11,7 @@ export default function ProfileStack() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
 }

@@ -18,9 +18,9 @@ export default function MainStack() {
     >
       {isAuth ? (
         <>
+          <Stack.Screen name="Tabs" component={Tabs} />
           <Stack.Screen name="SelectType" component={SelectType} />
           <Stack.Screen name="FillProfile" component={FillProfile} />
-          <Stack.Screen name="Tabs" component={Tabs} />
         </>
       ) : (
         <>

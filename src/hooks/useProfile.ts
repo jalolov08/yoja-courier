@@ -5,12 +5,7 @@ import { CourierType } from "../types/courier.enum";
 import { useAuth } from "../contexts/AuthContext/auth.context";
 
 interface UseProfileResult {
-  saveProfile: (
-    firstName: string,
-    lastName: string,
-    city: string,
-    type: CourierType
-  ) => Promise<boolean>;
+  saveProfile: (formData: FormData) => Promise<boolean>;
   isLoading: boolean;
   error: string | null;
 }
@@ -19,32 +14,32 @@ const useProfile = (): UseProfileResult => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { setAuthState, authState } = useAuth();
-  const saveProfile = async (
-    firstName: string,
-    lastName: string,
-    city: string,
-    type: CourierType
-  ) => {
+  const saveProfile = async (formData: FormData) => {
     setIsLoading(true);
     try {
-      const response = await axios.put(`${API}/courier/fill-profile`, {
-        firstName,
-        lastName,
-        city,
-        type,
-      });
+      const response = await axios.put(
+        `${API}/courier/fill-profile`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       if (response.status !== 200) {
         throw new Error("Ошибка сохранения профиля");
       }
       const courier = response.data.updatedCourier;
       if (authState) {
+        const { name, surname, city, type, photoUri } = courier;
         setAuthState({
           ...authState,
           city,
           type,
-          surname: lastName,
-          name: firstName,
+          surname,
+          name,
+          photoUri
         });
       }
 

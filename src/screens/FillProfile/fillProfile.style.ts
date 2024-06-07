@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -15,6 +16,7 @@ export default StyleSheet.create({
     fontSize: 13,
     color: "#D7D7D7",
     fontWeight: "400",
+    marginBottom: 20,
   },
   input: {
     height: 50,
@@ -39,5 +41,60 @@ export default StyleSheet.create({
     fontSize: 15,
     fontWeight: "400",
     color: "#091425",
+  },
+  image: {
+    width: 150,
+    height: 150,
+    borderRadius: 75, 
+    borderWidth: 1,
+    borderColor: "#ffffff99",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    marginTop: 20,
+    marginBottom: 20, 
+  },
+  imageText: {
+    fontSize: 16,
+    color: "#FFFFFF",
+    fontWeight: "500",
+    marginTop: 8,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", 
+  },
+  modalContent: {
+    backgroundColor: "#FFFFFF",
+    padding: 20,
+    borderRadius: 10,
+    width: "80%",
+  },
+  modalItem: {
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#E5E5E5",
+  },
+  modalItemFirst: {
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  modalText: {
+    fontSize: 16,
+    textAlign: "center",
+    color: "#333333",
+  },
+  modalCancel: {
+    paddingVertical: 15,
+    borderRadius: 10,
+    marginTop: 10,
+    backgroundColor: "#092325",
+  },
+  modalCancelText: {
+    fontSize: 16,
+    textAlign: "center",
+    color: "#FFFFFF",
   },
 });
