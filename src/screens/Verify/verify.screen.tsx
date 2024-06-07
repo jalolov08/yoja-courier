@@ -17,7 +17,7 @@ import {
 import { useAuth } from "../../contexts/AuthContext/auth.context";
 const CELL_COUNT = 4;
 
-export default function Verify() {
+export default function Verify({ navigation }) {
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
@@ -31,6 +31,7 @@ export default function Verify() {
     setLoading(true);
     Keyboard.dismiss();
     const res = await onVerify(value);
+    console.log(res.data)
     if (res.data.token) {
       console.log(res.data.message);
     } else {
@@ -38,7 +39,7 @@ export default function Verify() {
       setValue("");
     }
     if (!res.data.userExist && res.data.token) {
-      // navigation.navigate("FillProfile");
+      navigation.navigate("SelectType");
     }
 
     setLoading(false);

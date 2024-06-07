@@ -11,6 +11,7 @@ export default function AuthStack() {
         headerShown: false,
       }}
     >
+      
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Verify" component={Verify} />
     </Stack.Navigator>

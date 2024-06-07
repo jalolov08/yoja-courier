@@ -68,6 +68,52 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       return (error as any).response;
     }
   }
+  useEffect(() => {
+    const loadToken = async () => {
+      const token = await AsyncStorage.getItem("token");
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        console.log(token);
+        const stateString = await AsyncStorage.getItem("authState");
+        if (stateString) {
+          const state: IAuthState = JSON.parse(stateString);
+          setAuthState(state);
+        }
+        try {
+          const response = await axios.get(`${API}/courier/me`);
+          const { _id, phone, name, surname, city, status } =
+            response.data.courier;
+          setAuthState((prevState) => ({
+            ...prevState,
+            token: token,
+            authenticated: true,
+            phone,
+            _id,
+            name,
+            surname,
+            city,
+            status,
+          }));
+          await AsyncStorage.setItem(
+            "authState",
+            JSON.stringify({
+              token: token,
+              authenticated: true,
+              phone,
+              _id,
+              name,
+              surname,
+              city,
+              status,
+            })
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    loadToken();
+  }, []);
   const value = {
     authState,
     setAuthState,

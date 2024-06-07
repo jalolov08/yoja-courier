@@ -1,6 +1,8 @@
 export enum CourierType {
-  PEDESTRIAN = "pedestrian",
-  AUTO = "auto",
+  PEDESTRIAN = "Pedestrian",
+  CYCLE_MOTO = "Cycle/Moto",
+  AUTO = "Auto",
+  TRUCK = "Truck",
 }
 
 export enum CourierStatus {
