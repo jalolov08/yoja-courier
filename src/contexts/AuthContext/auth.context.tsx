@@ -15,6 +15,9 @@ interface IAuthState {
   city?: string | null;
   type?: CourierType | null;
   photoUri?: string | null;
+  balance?: {
+    amount: number | null;
+  };
 }
 
 interface IAuth {
@@ -82,7 +85,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         }
         try {
           const response = await axios.get(`${API}/courier/me`);
-          const { _id, phone, name, surname, city, status, photoUri } =
+          const { _id, phone, name, surname, city, status, photoUri, balance } =
             response.data.courier;
           setAuthState((prevState) => ({
             ...prevState,
@@ -95,6 +98,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
             city,
             status,
             photoUri,
+            balance,
           }));
           await AsyncStorage.setItem(
             "authState",
@@ -108,6 +112,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
               city,
               status,
               photoUri,
+              balance,
             })
           );
         } catch (error) {
