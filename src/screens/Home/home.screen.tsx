@@ -34,6 +34,7 @@ export default function Home() {
 
       try {
         const location = await Location.getCurrentPositionAsync({});
+        console.log(location);
         setLocation(location);
       } catch (error) {
         setErrorMsg("Не удалось получить местоположение");
@@ -48,6 +49,7 @@ export default function Home() {
         location.coords.latitude,
         location.coords.longitude
       );
+      console.log(response.orders);
       setOrders(response.orders);
     }
   };
@@ -80,14 +82,15 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <Header />
-      <ScrollView showsVerticalScrollIndicator={false}
-     refreshControl={
-      <RefreshControl
-        refreshing={isRefreshing}
-        onRefresh={onRefresh}
-        colors={["#006970"]}
-      />
-    }      
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            colors={["#006970"]}
+          />
+        }
       >
         <Balance />
         <Text style={styles.title}>Доступные Заказы</Text>
@@ -97,9 +100,9 @@ export default function Home() {
             color="#006970"
             style={{ marginTop: 40 }}
           />
-        ) : error ? (
+        ) : orders.length === 0 ? (
           <View>
-            <Text>Ошибка при получение заказов</Text>
+            <Text>Нет заказов</Text>
           </View>
         ) : (
           <AviableOrders orders={orders} />

@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import React from "react";
 import styles from "./aviableOrders.style";
 import { TOrder } from "../../types/order.type";
@@ -8,9 +8,14 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 export default function AviableOrders({ orders }: { orders: TOrder[] }) {
+  const navigation = useNavigation();
   const Item = ({ order }: { order: TOrder }) => (
-    <View style={styles.orderCont}>
+    <TouchableOpacity
+      style={styles.orderCont}
+      onPress={() => navigation.navigate("OrderDetails", { order })}
+    >
       <View
         style={{
           flexDirection: "row",
@@ -19,7 +24,7 @@ export default function AviableOrders({ orders }: { orders: TOrder[] }) {
       >
         <Ionicons name="location" size={24} color="#006970" />
         <Text style={styles.location}>
-          {order.clientPoint.city} {order.clientPoint.street}{" "}
+          {order.clientPoint.city} {order.clientPoint.street}
           {order.clientPoint.apartment}
         </Text>
       </View>
@@ -67,7 +72,7 @@ export default function AviableOrders({ orders }: { orders: TOrder[] }) {
       </View>
 
       <Text style={styles.price}>{order.deliveryAmount}₽</Text>
-    </View>
+    </TouchableOpacity>
   );
   return (
     <FlatList

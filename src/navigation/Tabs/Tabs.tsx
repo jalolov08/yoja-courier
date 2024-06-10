@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
-const visibleRoutes = ["SelectType"];
+const visibleRoutes = ["SelectType" , "OrderDetails"];
 
 const getTabBarVisibility = (route: string) => {
   const routeName = getFocusedRouteNameFromRoute(route);

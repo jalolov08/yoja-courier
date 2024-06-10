@@ -17,8 +17,7 @@ export enum OrderStatus {
   Cancelled = "Cancelled",
   UnderReview = "UnderReview",
 }
-
-export type TOrder = {
+export interface TOrder {
   _id: string;
   clientId: string;
   deliveryAmount: string;
@@ -27,9 +26,27 @@ export type TOrder = {
   distance: number;
   clientPhone: string;
   clientPoint: Point;
-  comment: string;
+  clientName: string;
+  comment?: string;
   courierId: string;
-  courierPhone: string;
+  courierPhone?: string;
   status: OrderStatus;
   trackingId: string;
-};
+  sellerProducts: OrderSellerProduct[];
+}
+
+export interface OrderSellerProduct {
+  seller: string;
+  name: string;
+  photoUri: string;
+  products: OrderProduct[];
+}
+
+export interface OrderProduct {
+  title: string;
+  photoUri: string;
+  selectedOption: number;
+  weight: number;
+  owner: string;
+  quantity: number;
+}
