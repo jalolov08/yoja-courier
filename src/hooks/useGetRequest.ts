@@ -6,24 +6,27 @@ const useGetRequest = (url: string) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response: AxiosResponse = await axios.get(url);
+      setData(response.data);
+    } catch (error: any) {
+      setError(error.response.data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response: AxiosResponse = await axios.get(url);
-        setData(response.data);
-      } catch (error: any) {
-        setError(error.response.data);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchData();
-
-    return () => {};
   }, [url]);
 
-  return { data, loading, error };
+  const refresh = () => {
+    fetchData();
+  };
+
+  return { data, loading, error, refresh };
 };
 
 export default useGetRequest;
