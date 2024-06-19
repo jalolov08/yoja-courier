@@ -13,7 +13,7 @@ import styles from "./documents.style";
 import Back from "../../components/Back/back.component";
 import selfie from "../../../assets/images/selfie.png";
 import * as ImagePicker from "expo-image-picker";
-import axios from "axios"; // Import axios
+import axios from "axios"; 
 import { API } from "../../../config";
 import Toast from "react-native-toast-message";
 import { useAuth } from "../../contexts/AuthContext/auth.context";

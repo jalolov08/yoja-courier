@@ -4,6 +4,7 @@ import { tabs } from "../../constants/tabs.constant";
 import { Feather } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { visibleRoutes } from "../../constants/visibleRoutes.constant";
 const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
@@ -28,7 +29,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
-const visibleRoutes = ["SelectType" , "OrderDetails" , "Documents"];
 
 const getTabBarVisibility = (route: string) => {
   const routeName = getFocusedRouteNameFromRoute(route);
